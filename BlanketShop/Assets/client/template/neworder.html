@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title> Thông tin đơn hàng mới từ khách hàng: {{CustomerName}}</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    Thông tin đơn hàng mới từ khách hàng: {{CustomerName}}<br />
+    Điện thoại: {{Phone}} <br />
+    Email: {{Email}}<br />
+    Địa chỉ: {{Address}}<br />
+    Trị giá: {{Total}}<br />
+    Dưới đây là chi tiết đơn hàng:<hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Tên sản phẩm</td>
+                <td>Số lượng</td>
+                <td>Đơn giá</td>
+                <td>Thành tiền</td>
+            </tr>
+        </thead>
+        <tbody>
+            {{ContentOrder}}
+        </tbody>
+    </table>
+</body>
+</html>

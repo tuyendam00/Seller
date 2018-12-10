@@ -1,0 +1,75 @@
+﻿@using BlanketShop.Common
+@model List<BlanketShop.Models.CartItem>
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <div class="section group">
+        @if (Model.Count > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="font-weight:bold;">Tên sản phẩm</th>
+                        <th style="font-weight:bold;">Ảnh sản phẩm</th>
+                        <th style="font-weight:bold;">Số lượng</th>
+                        <th style="font-weight:bold;">Đơn giá</th>
+                        <th style="font-weight:bold;">Thành tiền</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        decimal sumTotalProduct = 0;
+                    }
+                    @foreach (var item in Model)
+                    {
+
+                        sumTotalProduct += item.Product.Price.GetValueOrDefault(0) * item.Quantity;
+                        <tr>
+                            <td>@item.Product.Name</td>
+                            <td><img src="@item.Product.Image" width="100" /></td>
+                            <td><input type="text" class="txtQuantity" data-id="@item.Product.ID" value="@item.Quantity" /></td>
+                            <td>@item.Product.Price.GetValueOrDefault(0).ToString("N0")</td>
+                            <td>@((item.Product.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0") )</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div style="color:#613232;margin-left:73%;font-weight:bold;">Tổng tiền: @sumTotalProduct.ToString("N0") đ</div>
+                        }
+        @if (Session[CommonConstant.CartSession] != null)
+        {
+            <div class="section group">
+                <div class="col-md-6">
+                    @using (Html.BeginForm("Payment", "Cart", FormMethod.Post))
+                {
+                        @*<div class="form-group">
+                                <label>Người nhận</label>
+                                <input name="shipName" class="form-control" />
+                            </div>*@
+                        <div class="form-group">
+                            <label>Điện thoại</label>
+                            <input name="mobile" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label>Điạ chỉ</label>
+                            <input name="address" class="form-control" />
+                        </div>
+                        @*<div class="form-group">
+                                <label>Email</label>
+                                <input name="email" class="form-control" />
+                            </div>*@
+                        <button type="submit" class="btn">Gửi đơn hàng</button>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <div>Bạn chưa có sản phẩm nào trong giỏ hàng</div>
+        }
+    </div>
+</div>

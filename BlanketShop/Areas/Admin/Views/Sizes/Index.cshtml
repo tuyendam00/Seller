@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Model.EF.Sizes>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+
+@section header{
+    Danh sách kích cỡ
+}
+
+<p>
+    @Html.ActionLink("Tạo mới", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Kích cỡ
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Size_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Size_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Size_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Size_id })
+        </td>
+    </tr>
+}
+
+</table>

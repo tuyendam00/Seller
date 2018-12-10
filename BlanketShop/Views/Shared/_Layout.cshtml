@@ -1,0 +1,138 @@
+﻿<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Đệm Everon</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link href="/Assets/client/css/bootstrap.css" rel="stylesheet" />
+    <link href="/Assets/client/css/boostrap-social.css" rel="stylesheet" />
+    <link href="/Assets/client/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/Assets/client/css/bootstrap-theme.css" rel="stylesheet" />
+
+    <link href="/Assets/client/css/jquery-ui.css" rel="stylesheet" />
+    <link href="/Assets/client/css/style.css" rel="stylesheet" />
+
+
+    <link href="/Assets/client/css/slider.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/Assets/client/css/css_footer/style.css" rel="stylesheet" />
+
+    <script src="/Assets/client/js/jquery-1.11.3.min.js"></script>
+    <script src="/Assets/client/js/jquery-ui.js"></script>
+    <script src="/Assets/client/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/Assets/client/js/move-top.js"></script>
+    <script type="text/javascript" src="/Assets/client/js/easing.js"></script>
+    <script type="text/javascript" src="/Assets/client/js/startstop-slider.js"></script>
+
+    <script src="/Assets/client/js/easyResponsiveTabs.js" type="text/javascript"></script>
+    <link href="/Assets/client/css/easy-responsive-tabs.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="/Assets/client/css/global.css">
+    <script src="/Assets/client/js/slides.min.jquery.js"></script>
+
+    <link href="/Assets/client/css/styleSlide.css" rel="stylesheet" />
+    <script src="/Assets/client/jssor.slider.devpack/js/jssor.slider.min.js"></script>
+    <script src="/Assets/client/js/scriptSlide.js"></script>
+
+
+
+
+</head>
+<body style="background:#ebebeb;">
+    <div class="wrap" style="background:#fff;">
+        <div class="header">
+            <div class="headertop_desc" style="background:#053d1e">
+                @{Html.RenderAction("TopMenu", "Home");}
+                @{Html.RenderAction("HeaderCart", "Home");}
+            </div>
+            <div class="header_top" style="background: #318f1f">
+                <div class="logo">
+                    <a href="/"><img src="/Assets/client/images/everon.png" alt="" /></a>
+                </div>
+
+                <div class="introduce" style="font-weight: bold;color: #FF0;font-size: 28px;text-align: center;line-height: 35px;text-shadow: 2px 2px #9EB818;padding-top: 30px;float: left;">
+                    <div class="line1">CHĂN - GA - GỐI - ĐỆM</div>
+                    <div class="line2">HÀN QUỐC CHÍNH HÃNG</div>
+                </div>
+                <div style="padding-right: 0px;color: #fff;text-align: right;font-weight: bold;line-height: 25px;text-align: center;padding-right: 2px;padding-top: -15px;float: left;padding-top: 24px;padding-left: 65px;">
+                    <div>
+                        <span style="font-size:14px;">Showroom 1 : 278 Phố Huế - Hai Bà Trưng - Hà Nội</span>
+                    </div>
+                    <div>
+                        <span style="font-size:14px;">Showroom 2 : 47 Ngô Gia Tự - Long Biên - Hà Nội</span>
+                    </div>
+                    <div>
+                        <span style="font-size:14px;">0243.974.8111 - 098.468.5283</span>
+                    </div>
+                    <div>
+                        &nbsp;
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    function DropDown(el) {
+                        this.dd = el;
+                        this.initEvents();
+                    }
+                    DropDown.prototype = {
+                        initEvents: function () {
+                            var obj = this;
+
+                            obj.dd.on('click', function (event) {
+                                $(this).toggleClass('active');
+                                event.stopPropagation();
+                            });
+                        }
+                    }
+
+                    $(function () {
+
+                        var dd = new DropDown($('#dd'));
+
+                        $(document).click(function () {
+                            // all dropdowns
+                            $('.wrapper-dropdown-2').removeClass('active');
+                        });
+
+                    });
+
+                </script>
+                <div class="clear"></div>
+            </div>
+            <div class="header_bottom" style="background:#053d1e">
+                @{Html.RenderAction("MainMenu", "Home");}
+                <div class="search_box">
+                    <form action="/tim-kiem" method="get">
+                        <input type="text" id="txtKeyword" name="keyword" placeholder="Gõ từ khóa"><input type="submit" value="">
+                    </form>
+                </div>
+                <div class="clear"></div>
+            </div>
+            @RenderSection("slide", required: false)
+        </div>
+        <div class="main">
+            @RenderBody()
+        </div>
+    </div>
+
+    @RenderPage("Footer.cshtml")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $().UItoTop({ easingType: 'easeOutQuart' });
+
+        });
+    </script>
+    <a href="#" id="toTop"><span id="toTopHover"> </span></a>
+    <script src="/Assets/client/js/controller/baseController.js"></script>
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")*@
+    @RenderSection("jsFooter", required: false)
+</body>
+</html>
+

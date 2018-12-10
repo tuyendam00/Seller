@@ -1,0 +1,128 @@
+﻿@model Model.EF.Products
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
+<script src="//js.pusher.com/4.0/pusher.min.js"></script>
+<style>
+    .user_name {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .comments-list .media {
+        border-bottom: 1px dotted #ccc;
+    }
+</style>
+<h2>Details</h2>
+<div id="app">
+    <div>
+        <h4>BlogPost</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ID)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+        </dl>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="page-header">
+                    <h1><small class="pull-right">{{comments.length}} comments</small> Comments </h1>
+                </div>
+                <div class="comments-list">
+                    <div class="media" v-for="com in comments">
+                        <div class="media-body">
+                            <h4 class="media-heading user_name">{{com.NickName}}</h4>
+                            {{com.Comment}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <br />
+        <p>Your Comment</p>
+        <form onsubmit="return false;">
+            <input type="text" id="NickName" placeholder="Your Name" v-model="comment.NickName" class="form-control" />
+            <textarea rows="3" placeholder="Your Comment" id="Comment" v-model="comment.Comment" class="form-control"></textarea>
+            <button class="btn btn-success" v-on:click="submit_comment()">save</button>
+        </form>
+    </div>
+</div>
+<p>
+
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<script>
+    var pusher = new Pusher('d6da99d6e03f6878b567', {
+        cluster: 'ap1',encrypted: true
+    });
+    var my_channel = pusher.subscribe('my-channel');
+    var app = new Vue({
+        el: '#app',
+        data: {
+            comments: [],
+            comment: {
+                NickName: '',
+                Comment: '',
+                Product_id: @Model.ID
+            }
+        },
+        created: function () {
+            this.get_comments();
+            this.listen();
+        },
+        methods: {
+            get_comments: function () {
+                axios.get('@Url.Action("Comments", "Review", new { id = @Model.ID }, protocol: Request.Url.Scheme)')
+                  .then((response)=> {
+
+                      this.comments = response.data;
+
+                  });
+
+            },
+            listen: function () {
+                my_channel.bind("my-event", (data) => {
+                    if (data.Product_id == this.comment.Product_id){
+                        this.comments.push(data);
+                    }
+
+
+                })
+            },
+            submit_comment: function(){
+                axios.post('@Url.Action("Comment", "Review", new {}, protocol: Request.Url.Scheme)', this.comment)
+                 .then((response)=> {
+                     this.comment.NickName = '';
+                     this.comment.Comment = '';
+                    alert("Comment Submitted");
+
+                 });
+            }
+        }
+    });
+</script>

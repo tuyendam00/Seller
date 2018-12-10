@@ -1,0 +1,35 @@
+﻿@model Model.EF.Colors
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+
+@section header{
+    Xóa màu sắc
+}
+
+<h3>Bạn chắc chắn muốn xóa bản ghi này ?</h3>
+<div>
+    <h4>Colors</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Color_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Color_name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

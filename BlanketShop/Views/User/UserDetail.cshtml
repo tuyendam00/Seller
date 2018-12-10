@@ -1,0 +1,70 @@
+﻿@model Model.EF.User
+
+@{
+    ViewBag.Title = "UserDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <div class="form-horizontal">
+        <h4 style="margin-left:1%;">Thông tin tài khoản</h4>
+        <hr />
+
+        <div class="form-group">
+            <span class="control-label col-md-2">Tên tài khoản</span>
+
+
+            @*@Html.LabelFor(model => Tài khoản, new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10" style="padding-top: 0.5%;">
+                @Html.DisplayFor(model => model.UserName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="control-label col-md-2">Họ và tên</span>
+            <div class="col-md-10" style="padding-top: 0.5%;">
+                @Html.DisplayFor(model => model.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="control-label col-md-2">Địa chỉ</span>
+            <div class="col-md-10" style="padding-top: 0.5%;">
+                @Html.DisplayFor(model => model.Address, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style="padding-top: 0.5%;">
+                @Html.DisplayFor(model => model.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="control-label col-md-2">Số điện thoại</span>
+            <div class="col-md-10" style="padding-top: 0.5%;">
+                @Html.DisplayFor(model => model.Phone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="control-label col-md-2">Ngày tạo</span>
+            <div class="col-md-10" style="padding-top: 0.5%;">
+                @Html.DisplayFor(model => model.CreatedDate, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+        <p style="margin-left: 6%;">
+            @Html.ActionLink("Cập nhật tài khoản", "Edit", new { id = Model.ID })
+        </p>
+
+    </div>
+
+</div>
