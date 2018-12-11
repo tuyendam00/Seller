@@ -1313,6 +1313,8 @@
     <Content Include="Assets\client\css\bootstrap-theme.min.css" />
     <Content Include="Assets\client\css\bootstrap.css" />
     <Content Include="Assets\client\css\bootstrap.min.css" />
+    <Content Include="Assets\client\css\css_footer\common.css" />
+    <Content Include="Assets\client\css\css_footer\footerstyle.css" />
     <Content Include="Assets\client\css\css_footer\style.css" />
     <Content Include="Assets\client\css\easy-responsive-tabs.css" />
     <Content Include="Assets\client\css\font-awesome.min.css" />
@@ -1324,6 +1326,16 @@
     <Content Include="Assets\client\data\Provinces_Data.xml" />
     <Content Include="Assets\client\font\fontawesome-webfont.svg" />
     <Content Include="Assets\client\images\about2.jpg" />
+    <Content Include="Assets\client\images\Images\action-llist.png" />
+    <Content Include="Assets\client\images\Images\bkg_rating_hover.png" />
+    <Content Include="Assets\client\images\Images\btn-cart-hover.png" />
+    <Content Include="Assets\client\images\Images\btn-cart.png" />
+    <Content Include="Assets\client\images\Images\footer-contact-sp.png" />
+    <Content Include="Assets\client\images\Images\icon-verticalmenu.png" />
+    <Content Include="Assets\client\images\Images\i_block-list.gif" />
+    <Content Include="Assets\client\images\Images\i_mycart.png" />
+    <Content Include="Assets\client\images\Images\shadow_m.png" />
+    <Content Include="Assets\client\images\logo\1.png" />
     <Content Include="Assets\client\js\bootstrap.min.js" />
     <Content Include="Assets\client\js\controller\baseController.js" />
     <Content Include="Assets\client\js\controller\cartController.js" />
