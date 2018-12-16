@@ -151,7 +151,6 @@ namespace BlanketShop.Controllers
                         var orderDetail = new OrderDetails();
                         orderDetail.ProductID = item.Product.ID;
                         orderDetail.OrderID = id;
-                        orderDetail.Price = item.Product.Price;
                         orderDetail.Quantity = item.Quantity;
                         detailDao.Insert(orderDetail);
                         total += (item.Product.Price.GetValueOrDefault(0) * item.Quantity);

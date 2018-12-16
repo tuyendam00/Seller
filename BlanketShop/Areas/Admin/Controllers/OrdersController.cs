@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Model.Dao;
 using Model.EF;
 using PagedList;
 
@@ -69,11 +70,20 @@ namespace BlanketShop.Areas.Admin.Controllers
         // GET: Admin/Orders/Edit/5
         public ActionResult Edit(long? id)
         {
+            OrderDao orderDao = new OrderDao();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Orders orders = db.Orders.Find(id);
+            var producDetailsList = orderDao.getProductDetailsList(id.Value);
+            var totalMoney = (decimal)0;
+            foreach (var item in producDetailsList)
+            {
+                totalMoney += (item.Price * item.Quantity);
+            }
+            ViewBag.producDetailsList = producDetailsList;
+            ViewBag.totalMoney = totalMoney;
             if (orders == null)
             {
                 return HttpNotFound();
