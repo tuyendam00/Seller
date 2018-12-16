@@ -1,129 +1,67 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Trang chủ";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    var slides = (List<Model.EF.Slides>)ViewBag.Slides;
+    Layout = "~/Views/Shared/_LayoutSeller.cshtml";
+    //var slides = (List<Model.EF.Slides>)ViewBag.Slides;
     var listNewProduct = (List<Model.EF.Products>)ViewBag.NewProduct;
     var featureProduct = (List<Model.EF.Products>)ViewBag.FeatureProduct;
 }
 
-@section slide{
-    <div class="header_slide">
-        <div class="header_bottom_left">
-            <div class="categories">
-                @{Html.RenderAction("ProductCategory", "Product");}
-            </div>
-        </div>
-        <div class="header_bottom_right">
-            <div class="slider">
-                <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:980px;height:380px;overflow:hidden;visibility:hidden;">
-                    <!-- Loading Screen -->
-                    <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
-                        <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="../svg/loading/static-svg/spin.svg" />
-                    </div>
-                    <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:380px;overflow:hidden;">
-                        @foreach (var item in slides)
-                        {
-                            <div>
-                                <img data-u="image" src="@item.Image" />
-                            </div>
-                        }
-
-                    </div>
-                    <!-- Bullet Navigator -->
-                    <div data-u="navigator" class="jssorb053" style="position:absolute;bottom:12px;right:12px;" data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
-                        <div data-u="prototype" class="i" style="width:16px;height:16px;">
-                            <svg viewBox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                                <path class="b" d="M11400,13800H4600c-1320,0-2400-1080-2400-2400V4600c0-1320,1080-2400,2400-2400h6800 c1320,0,2400,1080,2400,2400v6800C13800,12720,12720,13800,11400,13800z"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    <!-- Arrow Navigator -->
-                    <div data-u="arrowleft" class="jssora093" style="width:50px;height:50px;top:0px;left:30px;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
-                        <svg viewBox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                            <circle class="c" cx="8000" cy="8000" r="5920"></circle>
-                            <polyline class="a" points="7777.8,6080 5857.8,8000 7777.8,9920 "></polyline>
-                            <line class="a" x1="10142.2" y1="8000" x2="5857.8" y2="8000"></line>
-                        </svg>
-                    </div>
-                    <div data-u="arrowright" class="jssora093" style="width:50px;height:50px;top:0px;right:30px;" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
-                        <svg viewBox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                            <circle class="c" cx="8000" cy="8000" r="5920"></circle>
-                            <polyline class="a" points="8222.2,6080 10142.2,8000 8222.2,9920 "></polyline>
-                            <line class="a" x1="5857.8" y1="8000" x2="10142.2" y2="8000"></line>
-                        </svg>
-                    </div>
-                </div>
-                <script type="text/javascript">jssor_1_slider_init();</script>
-                <div class="clear"></div>
-            </div>
-        </div>
-        <div class="clear"></div>
-    </div>
-
-}
-
 <div class="content">
-    <div class="content_top" style="background: #e89f659c;">
+    <div class="content_top">
         <div class="heading">
-            <h3 style="font-family:sans-serif;">Sản phẩm mới</h3>
+            <h3>Sản phẩm mới</h3>
         </div>
         <div class="see">
+            <p><a href="#">See all Products</a></p>
         </div>
         <div class="clear"></div>
     </div>
-    <div class="section group" style="margin: 3% 0%;padding-left:6%;">
+    <div class="section group">
+
         @foreach (var item in listNewProduct)
         {
             var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
             <div class="grid_1_of_4 images_1_of_4">
                 <a href="@url"><img src="@item.Image" alt="@item.Name" /></a>
-                <h2 style="font-family:sans-serif;color: #007FE6;font-weight: bold;padding-top: 5px;font-size: 12px;">@item.Name </h2>
+                <h2>@item.Name</h2>
                 <div class="price-details">
                     <div class="price-number">
-                        <p style="margin-left: 36px;font-size: 17px;padding: 0.4em 0;color: #333;">
-                            Giá:<span class="rupees" style="font-weight: bold;color: #e6001e;border: dotted 1px;border-left: none;
-    border-right: none;padding: 1px;font-size: 17px;text-decoration: none;">@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")đ</span>
-</p>
-</div>
-<div class="add-cart">
-    <h4><a href="/them-gio-hang?productId=@item.ID&quantity=1">Thêm vào giỏ</a></h4>
-</div>
-<div class="clear"></div>
-</div>
+                        <p><span class="rupees">@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")đ</span></p>
+                    </div>
+                    <div class="add-cart">
+                        <h4><a href="/them-gio-hang?productId=@item.ID&quantity=1">Add to Cart</a></h4>
+                    </div>
+                    <div class="clear"></div>
+                </div>
 
-</div>
+            </div>
         }
     </div>
-
-    <div class="content_bottom" style="background: #e89f659c;">
+    <div class="content_bottom">
         <div class="heading">
-            <h3 style="font-family:sans-serif;">Sản phẩm hot</h3>
+            <h3>Sản phẩm nổi bật</h3>
         </div>
         <div class="see">
-            @*<p><a href="/san-pham/@featureProduct.MetaTitle-@featureProduct.ID">Xem tất cả sản phẩm</a></p>*@
+            <p><a href="#">See all Products</a></p>
         </div>
         <div class="clear"></div>
     </div>
-    <div class="section group" style="margin: 3% 0%;padding-left:6%;">
+    <div class="section group">
         @foreach (var item in featureProduct)
         {
             var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
             <div class="grid_1_of_4 images_1_of_4">
                 <a href="@url"><img src="@item.Image" alt="@item.Name" /></a>
-                <h2 style="font-family:sans-serif;color: #007FE6;font-weight: bold;padding-top: 5px;font-size: 12px;">@item.Name </h2>
+                <h2>@item.Name</h2>
                 <div class="price-details">
                     <div class="price-number">
-                        <p style="margin-left: 36px;font-size: 17px;padding: 0.4em 0;color: #333;">
-                            Giá:<span class="rupees" style="font-weight: bold;color: #e6001e;border: dotted 1px;border-left: none;border-right: none;padding: 1px;font-size: 17px;text-decoration: none;">@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ") đ</span>
-                        </p>
+                        <p><span class="rupees">@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ") đ</span></p>
                     </div>
                     <div class="add-cart">
-                        <h4><a href="/them-gio-hang?productId=@item.ID&quantity=1">Thêm vào giỏ</a></h4>
+                        <h4><a href="/them-gio-hang?productId=@item.ID&quantity=1">Add to Cart</a></h4>
                     </div>
                     <div class="clear"></div>
                 </div>
-
             </div>
         }
     </div>

@@ -4,7 +4,7 @@
     <ul>
         @foreach (var item in Model)
         {
-            <li class="active"><a href="@item.Link" target="@item.Target" style="background:#e89f65;font-family:sans-serif; font-weight:bold">@item.Text</a></li>
+            <li class="active"><a href="@item.Link" target="@item.Target">@item.Text</a></li>
         }
         <div class="clear"></div>
     </ul>

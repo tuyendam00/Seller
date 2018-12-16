@@ -3,41 +3,54 @@
     li.dropdown:hover > ul.dropdown-menu {
         display: block;
     }
+
     .dropdown-menu {
         top: 84%;
     }
 </style>
-<ul style="font-size: 18px;
+@*<ul style="font-size: 18px;
 
-    background: #e89f65;" >
-    <h3 style="font-family:sans-serif;background: #2e6da426;text-align: center;padding: 3%;
-    font-weight: bold;
-    color: #fefefd;
-    font-size: 20px;">
-        Danh mục
-    </h3>
+        background: #e89f65;" >
+        <h3 style="font-family:sans-serif;background: #2e6da426;text-align: center;padding: 3%;
+        font-weight: bold;
+        color: #fefefd;
+        font-size: 20px;">
+            Danh mục
+        </h3>
+        @foreach (var item in Model.Where(x => x.ParentID == null))
+        {
+            var child = Model.Where(x => x.ParentID == item.ID);
+            // var parentClass = child.Count() > 0 ? "class=dropdown-toggle data-toggle=dropdown" : "";
+            <li class="dropdown">
+                <a href="/san-pham/@item.MetaTitle-@item.ID" style="color: white;
+        font-family: sans-serif;text-transform: capitalize;
+        font-size: 95%;">@item.Name</a><span class="expand submenu"></span>
+        @if (child.Count() > 0)
+        {
+            <ul class="dropdown-menu" style="margin-left: 100%;margin-top: -29px;background: #e89f65;"  >
+                @foreach (var childItem in child)
+                        {
+                    <li><a href="/san-pham/@childItem.MetaTitle-@childItem.ID" style="font-family: sans-serif;
+        color: white;
+        background: #e89f65;">@childItem.Name</a></li>
+                }
+
+            </ul>
+        }
+
+    </li>
+        }
+
+    </ul>*@
+
+<ul>
+    <h3>Categories</h3>
     @foreach (var item in Model.Where(x => x.ParentID == null))
     {
         var child = Model.Where(x => x.ParentID == item.ID);
-        // var parentClass = child.Count() > 0 ? "class=dropdown-toggle data-toggle=dropdown" : "";
         <li class="dropdown">
-            <a href="/san-pham/@item.MetaTitle-@item.ID" style="color: white;
-    font-family: sans-serif;text-transform: capitalize;
-    font-size: 95%;">@item.Name</a><span class="expand submenu"></span>
-    @if (child.Count() > 0)
-    {
-        <ul class="dropdown-menu" style="margin-left: 100%;margin-top: -29px;background: #e89f65;"  >
-            @foreach (var childItem in child)
-                    {
-                <li><a href="/san-pham/@childItem.MetaTitle-@childItem.ID" style="font-family: sans-serif;
-    color: white;
-    background: #e89f65;">@childItem.Name</a></li>
-            }
+            <a href="/san-pham/@item.MetaTitle-@item.ID">@item.Name</a>
 
-        </ul>
+        </li>
     }
-
-</li>
-    }
-
 </ul>
