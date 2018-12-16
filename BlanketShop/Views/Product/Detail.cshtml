@@ -2,7 +2,8 @@
 
 @{
     ViewBag.Title = "Detail";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutSeller.cshtml";
+    var productCategory = ViewBag.ProductCategory as List<Model.EF.Categories>;
     var category = (Model.EF.Categories)ViewBag.Category;
     var material = (Model.EF.Materials)ViewBag.Material;
     var country = (Model.EF.Contries)ViewBag.Country;
@@ -14,109 +15,173 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
 <script src="//js.pusher.com/4.0/pusher.min.js"></script>
 
-<style>
-    .span_1_of_2 {
-        width: 73.22%;
-        /*padding: 1.5%;*/
-    }
-
-    .span_3_of_1 {
-        width: 25.2%;
-        padding: 0%;
-    }
-
-    .rightsidebar {
-        display: block;
-        float: left;
-        margin-left: 1.57%;
-    }
-
-
-    td {
-        border: solid thin gray;
-        padding: 5px 4px;
-    }
-
-    table {
-        width: 100%;
-    }
-
-    .child1 {
-        padding: 0px 20px 0px 5px;
-        width: 130px;
-        font-weight: bold;
-        font-size: 100%;
-    }
-
-    .name {
-        margin: 0px;
-        font-size: 100%;
-        font-weight: bold;
-        color: #1D862E;
-        position: relative;
-    }
-
-    .thuoc {
-        margin: 0px;
-        font-size: 16px;
-        color: #1D862E;
-        position: relative;
-    }
-
-    .price {
-        color: #E6001E;
-        font-weight: bold;
-        font-size: 16px;
-        text-align: left;
-    }
-
-    .baohanh {
-        margin: 0px;
-        font-size: 16px;
-        font-weight: normal;
-        position: relative;
-    }
-
-    .tinhtrang {
-        margin: 0px;
-        font-size: 16px;
-        position: relative;
-        color: #1D862E;
-        font-weight: bold;
-    }
-
-    .user_name {
-        font-size: 14px;
-        font-weight: bold;
-    }
-
-    .comments-list .media {
-        border-bottom: 1px dotted #ccc;
-    }
-
-    }
-</style>
 <script>
-		$(function(){
-			$('#products').slides({
-				preload: true,
-				preloadImage: 'img/loading.gif',
-				effect: 'slide, fade',
-				crossfade: true,
-				slideSpeed: 350,
-				fadeSpeed: 500,
-				generateNextPrev: true,
-				generatePagination: false
-			});
-		});
+    $(function(){
+        $('#products').slides({
+            preload: true,
+            preloadImage: 'img/loading.gif',
+            effect: 'slide, fade',
+            crossfade: true,
+            slideSpeed: 350,
+            fadeSpeed: 500,
+            generateNextPrev: true,
+            generatePagination: false
+        });
+    });
 </script>
+@*<div class="content">
+        <div class="content_top">
+            <div class="back-links">
+                <p style="font-size:100%;    width: 120%;"><a href="/">Trang chủ</a> >>> <a href="/san-pham/@category.MetaTitle-@category.ID">@category.Name</a></p>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="section group">
+            <div class="cont-desc span_1_of_2">
+                <div class="product-details">
+                    <div class="grid images_3_of_2">
+                        <div id="container">
+                            <div id="products_example">
+                                <div id="products">
+                                    <div class="slides_container">
+                                        <a href="#" target="_blank"><img src="@Model.Image" alt=" " /></a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="desc span_3_of_2">
+                        <div class="product-content">
+                            <div class="brief">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody>
+
+                                        <tr><td class="child1">Sản phẩm </td><td><h1 class="name" id="product_name">@Model.Name</h1></td></tr>
+                                        <tr><td class="child1">Chất Liệu </td><td><div class="thuoc" id="product_thuoc">@material.Material_name</div></td></tr>
+                                        <tr><td class="child1">Màu sắc</td><td><div class="thuoc" id="product_thuoc">@color.Color_name</div></td></tr>
+                                        <tr><td class="child1">Xuất xứ </td><td><div class="thuoc" id="product_thuoc">@country.Country_name</div></td></tr>
+                                        <tr><td class="child1">Giá</td><td><div class="price" id="product_price">@(Model.Price.HasValue ? Model.Price.Value.ToString("N0") : "Liên hệ") đ</div></td></tr>
+                                        <tr><td class="child1">Bảo Hành</td><td><div class="baohanh" id="product_baohanh">Chính hãng @Model.Warranty năm</div></td></tr>
+                                        <tr><td class="child1">Tình Trạng </td><td><div class="tinhtrang" id="product_tinhtrang">@(Model.Status == true ? "Mới còn hàng" : "Hết hàng")</div></td></tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="price" style="font-size: 100%;">
+                            <p>Giá:<span>@(Model.Price.HasValue ? Model.Price.Value.ToString("N0") : "Liên hệ") đ</span></p>
+                        </div>
+                        <div class="share-desc">
+
+                            <div class="button" style="float: left;margin-top: 0%;"><span><a href="/them-gio-hang?productId=@Model.ID&quantity=1">Thêm vào giỏ</a></span></div>
+                            <div class="clear"></div>
+                        </div>
+
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="product_desc">
+                    <div id="horizontalTab">
+                        <ul class="resp-tabs-list">
+                            <li>Thông tin chi tiết</li>
+                            <li>Đánh giá sản phẩm</li>
+                            <div class="clear"></div>
+                        </ul>
+                        <div class="resp-tabs-container">
+                            <div class="product-desc">
+                                <p style="color:#191717;font-size: 0.9em;">@Html.Raw(Model.Description)</p>
+                            </div>
+                            <div class="your-review">
+                                <h3 style="font-family: sans-serif;">Bạn nghĩ về sản phẩm của chúng tôi ?</h3>
+                                <p style="font-family: sans-serif;margin-top: 1%;">Hãy gửi ý kiến cho chúng tôi </p>
+                                                          <div id="app">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="page-header" style="width:98%;">
+                                                    <h1 style="padding-left: 2%;"><small class="pull-right" style="padding-right: 10%;">{{comments.length}} comments</small> Comments </h1>
+                                                </div>
+                                                <div class="comments-list">
+                                                    <div style="width:98%;" class="media" v-for="com in comments">
+                                                        <div class="media-body" style="padding-left:2%">
+                                                            <h4 class="media-heading user_name">NickName: {{com.NickName}}</h4>
+                                                            {{com.Comment}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="container">
+                                        <br />
+                                        <p>Phản hồi của bạn</p>
+                                        <form onsubmit="return false;">
+                                            <input type="text" id="NickName" placeholder="Nick Name" v-model="comment.NickName" class="form-control" />
+                                            <textarea rows="3" placeholder="Your Comment" id="Comment" v-model="comment.Comment" class="form-control"></textarea>
+                                            <button style="margin-top: 1%;" class="btn btn-success" v-on:click="submit_comment()">save</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#horizontalTab').easyResponsiveTabs({
+                            type: 'default', //Types: default, vertical, accordion
+                            width: 'auto', //auto or any width like 600px
+                            fit: true   // 100% fit in a container
+                        });
+                    });
+                </script>
+                <div class="content_bottom">
+                    <div class="heading" >
+                        <h3 style="font-family:sans-serif;">Sản phẩm liên quan</h3>
+                    </div>
+                    <div class="see">
+
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="section group">
+                    @foreach (var item in relatedProduct)
+                    {
+                        var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                        <div class="grid_1_of_4 images_1_of_4">
+                            <a href="@url"><img src="@item.Image" alt=""></a>
+                            <div class="price" style="border:none">
+                                <div class="add-cart" style="float:none">
+                                    <h4><a href="/them-gio-hang?productId=@item.ID&quantity=1">Add to Cart</a></h4>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+            <div class="rightsidebar span_3_of_1">
+                @{Html.RenderAction("ProductCategory", "Product");}
+
+            </div>
+        </div>
+    </div>*@
 
 <div class="content">
     <div class="content_top">
-        <div class="back-links">
-            <p style="font-size:100%;    width: 120%;"><a href="/">Trang chủ</a> >>> <a href="/san-pham/@category.MetaTitle-@category.ID">@category.Name</a></p>
-
-        </div>
+        @*<div class="back-links">
+            <p><a href="index.html">Home</a> >>>> <a href="/san-pham/@category.MetaTitle-@category.ID">@category.Name</a></p>
+        </div>*@
+        <ul class="breadcrumb" style="margin-bottom: 0px;">
+            <li><a href="#">Home</a></li>
+            <li><a href="/san-pham/@category.MetaTitle-@category.ID">@category.Name</a></li>
+        </ul>
         <div class="clear"></div>
     </div>
     <div class="section group">
@@ -128,118 +193,84 @@
                             <div id="products">
                                 <div class="slides_container">
                                     <a href="#" target="_blank"><img src="@Model.Image" alt=" " /></a>
-
                                 </div>
-                                @*<ul class="pagination">
-                                        <li><a href="#"><img src="images/thumbnailslide-1.jpg" alt=" " /></a></li>
-                                        <li><a href="#"><img src="images/thumbnailslide-2.jpg" alt=" " /></a></li>
-                                        <li><a href="#"><img src="images/thumbnailslide-3.jpg" alt=" " /></a></li>
-                                        <li><a href="#"><img src="images/thumbnailslide-4.jpg" alt=" " /></a></li>
-                                        <li><a href="#"><img src="images/thumbnailslide-5.jpg" alt=" " /></a></li>
-                                        <li><a href="#"><img src="images/thumbnailslide-6.jpg" alt=" " /></a></li>
-                                    </ul>*@
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="desc span_3_of_2">
-                    <div class="product-content">
-                        <div class="brief">
-                            <table cellpadding="0" cellspacing="0">
-                                <tbody>
-
-                                    <tr><td class="child1">Sản phẩm </td><td><h1 class="name" id="product_name">@Model.Name</h1></td></tr>
-                                    <tr><td class="child1">Chất Liệu </td><td><div class="thuoc" id="product_thuoc">@material.Material_name</div></td></tr>
-                                    <tr><td class="child1">Màu sắc</td><td><div class="thuoc" id="product_thuoc">@color.Color_name</div></td></tr>
-                                    <tr><td class="child1">Xuất xứ </td><td><div class="thuoc" id="product_thuoc">@country.Country_name</div></td></tr>
-                                    <tr><td class="child1">Giá</td><td><div class="price" id="product_price">@(Model.Price.HasValue ? Model.Price.Value.ToString("N0") : "Liên hệ") đ</div></td></tr>
-                                    <tr><td class="child1">Bảo Hành</td><td><div class="baohanh" id="product_baohanh">Chính hãng @Model.Warranty năm</div></td></tr>
-                                    <tr><td class="child1">Tình Trạng </td><td><div class="tinhtrang" id="product_tinhtrang">@(Model.Status == true ? "Mới còn hàng" : "Hết hàng")</div></td></tr>
-
-                                </tbody>
-                            </table>
-                        </div>
+                    <h2>@Model.Name</h2>
+                    <p>Chất liệu: @material.Material_name</p>
+                    <p>Màu sắc: @color.Color_name</p>
+                    <p>Xuất xứ: @country.Country_name</p>
+                    <p>Bảo hành: Chính hãng @Model.Warranty năm</p>
+                    <p>Tình trạng: @(Model.Status == true ? "Còn hàng" : "Hết hàng")</p>
+                    <div class="price">
+                        <p>Price: <span>@(Model.Price.HasValue ? Model.Price.Value.ToString("N0") : "Liên hệ") đ</span></p>
                     </div>
-                    <div class="price" style="font-size: 100%;">
-                        <p>Giá:<span>@(Model.Price.HasValue ? Model.Price.Value.ToString("N0") : "Liên hệ") đ</span></p>
+                    <div class="available">
+                        <p></p>
+
                     </div>
                     <div class="share-desc">
-
-                        <div class="button" style="float: left;margin-top: 0%;"><span><a href="/them-gio-hang?productId=@Model.ID&quantity=1">Thêm vào giỏ</a></span></div>
+                        <div class="share">
+                        </div>
+                        <div class="button"><span><a href="/them-gio-hang?productId=@Model.ID&quantity=1">Add to Cart</a></span></div>
                         <div class="clear"></div>
                     </div>
-
                 </div>
                 <div class="clear"></div>
             </div>
             <div class="product_desc">
                 <div id="horizontalTab">
                     <ul class="resp-tabs-list">
-                        <li>Thông tin chi tiết</li>
-                        <li>Đánh giá sản phẩm</li>
+                        <li>Product Details</li>
+                        @*<li>product Tags</li>
+                        <li>Product Reviews</li>*@
                         <div class="clear"></div>
                     </ul>
                     <div class="resp-tabs-container">
                         <div class="product-desc">
-                            <p style="color:#191717;font-size: 0.9em;">@Html.Raw(Model.Description)</p>
+                            <p>@Html.Raw(Model.Description)</p>
                         </div>
-                        <div class="your-review">
-                            <h3 style="font-family: sans-serif;">Bạn nghĩ về sản phẩm của chúng tôi ?</h3>
-                            <p style="font-family: sans-serif;margin-top: 1%;">Hãy gửi ý kiến cho chúng tôi </p>
-                            @*@using (Html.BeginForm("SubmitReview", "Product", FormMethod.Post))
-                                {
-
+                        <div class="product-tags">
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                            <h4>Add Your Tags:</h4>
+                            <div class="input-box">
+                                <input type="text" value="">
+                            </div>
+                            <div class="button"><span><a href="#">Add Tags</a></span></div>
+                        </div>
+                        <div class="review">
+                            <h4>Lorem ipsum Review by <a href="#">Finibus Bonorum</a></h4>
+                            <ul>
+                                <li>Price :<a href="#"><img src="images/price-rating.png" alt="" /></a></li>
+                                <li>Value :<a href="#"><img src="images/value-rating.png" alt="" /></a></li>
+                                <li>Quality :<a href="#"><img src="images/quality-rating.png" alt="" /></a></li>
+                            </ul>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                            <div class="your-review">
+                                <h3>How Do You Rate This Product?</h3>
+                                <p>Write Your Own Review?</p>
+                                <form>
                                     <div>
-                                        <span><label>ProductId<span class="red">*</span></label></span>
-                                        <span><input type="text" name="productId" value="@Model.ID">@Model.ID</span>
+                                        <span><label>Nickname<span class="red">*</span></label></span>
+                                        <span><input type="text" value=""></span>
                                     </div>
                                     <div>
-                                        <span><label>Tên<span class="red">*</span></label></span>
-                                        <span><input type="text" name="NickName" value=""></span>
+                                        <span><label>Summary of Your Review<span class="red">*</span></label></span>
+                                        <span><input type="text" value=""></span>
                                     </div>
                                     <div>
-                                        <span><label>Chất lượng<span class="red">*</span></label></span>
-                                        <span><input type="text" name="quality" value=""></span>
-                                    </div>
-                                    <div>
-                                        <span><label>Ý kiến<span class="red">*</span></label></span>
-                                        <span><textarea name="comment"> </textarea></span>
+                                        <span><label>Review<span class="red">*</span></label></span>
+                                        <span><textarea> </textarea></span>
                                     </div>
                                     <div>
                                         <span><input type="submit" value="SUBMIT REVIEW"></span>
                                     </div>
-                                }*@
-                            <div id="app">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <div class="page-header" style="width:98%;">
-                                                <h1 style="padding-left: 2%;"><small class="pull-right" style="padding-right: 10%;">{{comments.length}} comments</small> Comments </h1>
-                                            </div>
-                                            <div class="comments-list">
-                                                <div style="width:98%;" class="media" v-for="com in comments">
-                                                    <div class="media-body" style="padding-left:2%">
-                                                        <h4 class="media-heading user_name">NickName: {{com.NickName}}</h4>
-                                                        {{com.Comment}}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="container">
-                                    <br />
-                                    <p>Phản hồi của bạn</p>
-                                    <form onsubmit="return false;">
-                                        <input type="text" id="NickName" placeholder="Nick Name" v-model="comment.NickName" class="form-control" />
-                                        <textarea rows="3" placeholder="Your Comment" id="Comment" v-model="comment.Comment" class="form-control"></textarea>
-                                        <button style="margin-top: 1%;" class="btn btn-success" v-on:click="submit_comment()">save</button>
-                                    </form>
-                                </div>
+                                </form>
                             </div>
-                            <p>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -253,11 +284,11 @@
                 });
             </script>
             <div class="content_bottom">
-                <div class="heading" >
-                    <h3 style="font-family:sans-serif;">Sản phẩm liên quan</h3>
+                <div class="heading">
+                    <h3>Related Products</h3>
                 </div>
                 <div class="see">
-                    @*<p><a href="/san-pham">Xem tất cả</a></p>*@
+                    <p><a href="#">See all Products</a></p>
                 </div>
                 <div class="clear"></div>
             </div>
@@ -275,18 +306,18 @@
                         </div>
                     </div>
                 }
-
-
             </div>
+            
         </div>
-        <div class="rightsidebar span_3_of_1">
-            @{Html.RenderAction("ProductCategory", "Product");}
-
+        <div class="rightsidebar span_3_of_1" style="text-align:right">
+            <img src="~/Assets/clientSeller/img/1439276593_songhong266-200.jpg" />
+            <img src="~/Assets/clientSeller/img/1422432697_doremon1.jpg" />
+            <img src="~/Assets/clientSeller/img/1422432799_sh5.jpg" />
+            <img src="~/Assets/clientSeller/img/1422432942_sh4.jpg" />
+            <img src="~/Assets/clientSeller/img/1422433015_sh6jpg.jpg" />
         </div>
     </div>
 </div>
-
-
 <script>
     var pusher = new Pusher('d6da99d6e03f6878b567', {
         cluster: 'ap1',encrypted: true
@@ -299,8 +330,8 @@
             comment: {
                 NickName: '',
                 Comment: '',
-                Product_id: @Model.ID
-            }
+                Product_id: @Model.ID,
+                }
         },
         created: function () {
             this.get_comments();
@@ -330,7 +361,7 @@
                  .then((response)=> {
                      this.comment.NickName = '';
                      this.comment.Comment = '';
-                    alert("Comment Submitted");
+                     alert("Comment Submitted");
 
                  });
             }

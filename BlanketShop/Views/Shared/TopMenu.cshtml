@@ -3,6 +3,38 @@
 @using BlanketShop.Common;
 
 
+@*<div class="account_desc">
+        @{
+            var session = (UserLogin)Session[CommonConstant.USER_SESSION];
+        }
+        @if (session == null)
+        {
+            <ul>
+                @foreach (var item in Model)
+                {
+                    <li><a href="@item.Link" target="@item.Target" style="font-size: 110%;color: white;">@item.Text</a></li>
+
+                }
+
+            </ul>
+        }
+        else
+        {
+            <ul>
+                <li style="font-size: 110%;color: white;">
+                    Xin chào:
+                    <a style="font-size: 110%;color: white;" href="/user-detail?id=@session.UserID">@session.UserName</a>
+                </li>
+                <li>@Html.ActionLink("Thoát", "Logout", "User")</li>
+            </ul>
+        }
+
+    </div>
+    <div class="clear"></div>*@
+
+<div class="call">
+    <p><span>Need help?</span> call us <span class="number">1-22-3456789</span></span></p>
+</div>
 <div class="account_desc">
     @{
         var session = (UserLogin)Session[CommonConstant.USER_SESSION];
@@ -12,22 +44,15 @@
         <ul>
             @foreach (var item in Model)
             {
-                <li><a href="@item.Link" target="@item.Target" style="font-size: 110%;color: white;">@item.Text</a></li>
-
+                <li><a href="@item.Link" target="@item.Target">@item.Text</a></li>
             }
-
         </ul>
     }
     else
     {
         <ul>
-            <li style="font-size: 110%;color: white;">
-                Xin chào:
-                <a style="font-size: 110%;color: white;" href="/user-detail?id=@session.UserID">@session.UserName</a>
-            </li>
+            <li>Hello: <a href="/user-detail?id=@session.UserID">@session.UserName</a></li>
             <li>@Html.ActionLink("Thoát", "Logout", "User")</li>
         </ul>
     }
-
 </div>
-<div class="clear"></div>
