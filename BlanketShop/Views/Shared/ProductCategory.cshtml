@@ -44,12 +44,12 @@
     </ul>*@
 
 <ul>
-    <h3>Categories</h3>
+    <h3 style="font-family:sans-serif">Danh mục</h3>
     @foreach (var item in Model.Where(x => x.ParentID == null))
     {
         var child = Model.Where(x => x.ParentID == item.ID);
-        <li class="dropdown">
-            <a href="/san-pham/@item.MetaTitle-@item.ID">@item.Name</a>
+        <li class="dropdown"  style="font-family:sans-serif">
+            <a style="font-family: sans-serif;" href="/san-pham/@item.MetaTitle-@item.ID">@item.Name</a>
 
         </li>
     }

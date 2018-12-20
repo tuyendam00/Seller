@@ -2,7 +2,7 @@
 @model List<BlanketShop.Models.CartItem>
 @{
     ViewBag.Title = "Payment";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutSeller.cshtml";
 }
 
 <div class="content">
@@ -55,14 +55,18 @@
                             <input name="mobile" class="form-control" />
                         </div>
                         <div class="form-group">
-                            <label>Điạ chỉ</label>
+                            <label>Địa chỉ</label>
                             <input name="address" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label>Mô tả</label>
+                            <input name="description" class="form-control" />
                         </div>
                         @*<div class="form-group">
                                 <label>Email</label>
                                 <input name="email" class="form-control" />
                             </div>*@
-                        <button type="submit" class="btn">Gửi đơn hàng</button>
+                        <button type="submit" class="btn btn-success">Gửi đơn hàng</button>
                     }
                 </div>
             </div>
