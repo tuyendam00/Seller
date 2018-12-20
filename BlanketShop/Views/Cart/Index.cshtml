@@ -3,14 +3,10 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-@section jsFooter{
-    <script src="/Assets/client/js/controller/cartController.js"></script>
+    Layout = "~/Views/Shared/_LayoutSeller.cshtml";
 }
 
 <div class="content">
-
     <div class="section group">
         @if (Model.Count > 0)
         {
@@ -52,39 +48,13 @@
             <button id="btnUpdate" class="btn btn-danger">Cập nhật giỏ hàng</button>
             <button id="btnDeleteAll" class="btn btn-google">Xóa giỏ hàng</button>
             <button id="btnPayment" class="btn btn-success">Đặt hàng</button>
-            <br />
-            <br />
-            <form action="@ConfigurationManager.AppSettings["urlSubmitPayment"]" method="post">
-
-                <!-- Identify your business so that you can collect the payments. -->
-                <input type="hidden" name="business" value="@ConfigurationManager.AppSettings["accountBusiness"]">
-
-                <!-- Specify a Buy Now button. -->
-                <input type="hidden" name="cmd" value="_xclick">
-
-                @{
-                    var tranferToUSD = Math.Round((Decimal)(sumTotalProduct / 23000), 2).ToString().Replace(",", ".");
-                }
-                <!-- Specify details about the item that buyers will purchase. -->
-                <input type="hidden" name="item_name" value="Checkout">
-                <input type="hidden" name="amount" value="@tranferToUSD">
-                <input type="hidden" name="currency_code" value="USD">
-
-                <!-- Display the payment button. -->
-                <span style="margin-left:1%;color:#2d2d8c;font-weight:bold;">Thanh toán trực tuyến ></span>
-                <input type="image" name="submit" border="0"
-                       src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif"
-                       alt="Buy Now">
-                <img alt="" border="0" width="1" height="1"
-                     src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif">
-
-            </form>
-                    }
-                    else
-                    {
-                        <span class="alert alert-danger" style="margin-left:1%;">Chưa có sản phẩm nào trong giỏ hàng</span>
-                    }
+                        }
+                        else
+                        {
+                            <span class="alert alert-info" style="margin-left:1%;">Chưa có sản phẩm nào trong giỏ hàng</span>
+                        }
     </div>
     <br />
     <br />
 </div>
+<script src="~/Assets/client/js/controller/cartController.js"></script>

@@ -22,6 +22,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
     <link href="/Assets/client/css/slider.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/Assets/client/css/css_footer/style.css" rel="stylesheet" />
+    <link href="/Assets/client/css/css_footer/common.css" rel="stylesheet" />
+    <link href="~/Assets/client/css/css_footer/footerstyle.css" rel="stylesheet" />
 
     <script src="/Assets/client/js/jquery-1.11.3.min.js"></script>
     <script src="/Assets/client/js/jquery-ui.js"></script>
@@ -46,11 +48,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <body style="background:#ebebeb;">
     <div class="wrap" style="background:#fff;">
         <div class="header">
-            <div class="headertop_desc" style="background:#053d1e">
+            <div class="headertop_desc" style="background:#e89f65">
                 @{Html.RenderAction("TopMenu", "Home");}
                 @{Html.RenderAction("HeaderCart", "Home");}
             </div>
-            <div class="header_top" style="background: #318f1f">
+            <div class="header_top" style="background: #e3dec1">
                 <div class="logo">
                     <a href="/"><img src="/Assets/client/images/everon.png" alt="" /></a>
                 </div>
@@ -59,7 +61,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="line1">CHĂN - GA - GỐI - ĐỆM</div>
                     <div class="line2">HÀN QUỐC CHÍNH HÃNG</div>
                 </div>
-                <div style="padding-right: 0px;color: #fff;text-align: right;font-weight: bold;line-height: 25px;text-align: center;padding-right: 2px;padding-top: -15px;float: left;padding-top: 24px;padding-left: 65px;">
+                <div style="padding-right: 0px;text-align: right;font-weight: bold;line-height: 25px;text-align: center;padding-right: 2px;padding-top: -15px;float: left;padding-top: 24px;padding-left: 65px;">
                     <div>
                         <span style="font-size:14px;">Showroom 1 : 278 Phố Huế - Hai Bà Trưng - Hà Nội</span>
                     </div>
@@ -104,7 +106,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </script>
                 <div class="clear"></div>
             </div>
-            <div class="header_bottom" style="background:#053d1e">
+            <div class="header_bottom" style="background:#e89f65">
                 @{Html.RenderAction("MainMenu", "Home");}
                 <div class="search_box">
                     <form action="/tim-kiem" method="get">

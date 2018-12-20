@@ -59,9 +59,9 @@ namespace Model.EF
                 .WithOptional(e => e.MenuType)
                 .HasForeignKey(e => e.TypeID);
 
-            modelBuilder.Entity<OrderDetails>()
-                .Property(e => e.Price)
-                .HasPrecision(18, 0);
+            //modelBuilder.Entity<OrderDetails>()
+            //    .Property(e => e.Price)
+            //    .HasPrecision(18, 0);
 
             modelBuilder.Entity<Orders>()
                 .Property(e => e.ShipMobile)

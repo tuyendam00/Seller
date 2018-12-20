@@ -19,8 +19,6 @@ namespace Model.EF
 
         public int? Quantity { get; set; }
 
-        public decimal? Price { get; set; }
-
         public virtual Orders Orders { get; set; }
 
         public virtual Products Products { get; set; }

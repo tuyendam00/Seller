@@ -122,7 +122,7 @@ namespace BlanketShop.Controllers
             return View(list);
         }
         [HttpPost]
-        public ActionResult Payment(string mobile, string address)
+        public ActionResult Payment(string mobile, string address, string description)
         {
             if (Session[CommonConstant.USER_SESSION] != null)
             {
@@ -137,6 +137,8 @@ namespace BlanketShop.Controllers
                 order.ShipMobile = mobile;
                 order.ShipName = shipName;
                 order.ShipEmail = email;
+                order.Status = false;
+                order.Description = description;
                 var contentOrder = "";
                 decimal sumTotalProduct = 0;
                 try
@@ -151,7 +153,6 @@ namespace BlanketShop.Controllers
                         var orderDetail = new OrderDetails();
                         orderDetail.ProductID = item.Product.ID;
                         orderDetail.OrderID = id;
-                        orderDetail.Price = item.Product.Price;
                         orderDetail.Quantity = item.Quantity;
                         detailDao.Insert(orderDetail);
                         total += (item.Product.Price.GetValueOrDefault(0) * item.Quantity);

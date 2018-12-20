@@ -58,6 +58,7 @@ namespace BlanketShop.Controllers
             ViewBag.Country = new CountryDao().ViewDetail(product.Contry_id.Value);
             ViewBag.Color = new ColorDao().ViewDetail(product.Color_id.Value);
             ViewBag.RelatedProducts = new ProductDao().ListRelatedProducts(id);
+            ViewBag.ProductCategory = new CategoryDao().ListAll();
             return View(product);
         }
 

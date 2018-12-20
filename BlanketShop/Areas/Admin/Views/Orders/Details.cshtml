@@ -1,0 +1,70 @@
+﻿@model Model.EF.Orders
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+
+@section header{
+    Chi tiết hóa đơn
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+        <div class="row">
+            <div class="btnSave pull-right">
+                <input type="submit" name="submit" value="Save" class="btn btn-primary" />
+                <a href="~/Admin/Orders" class="btn btn-default">Back</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="pull-left">
+                <h3>Danh sách hóa đơn</h3>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Ngày tạo</th>
+                        <th>Tên khách hàng</th>
+                        <th>Màu sắc</th>
+                        <th>Kích cỡ</th>
+                        <th>Xuất xứ</th>
+                        <th>Đơn giá</th>
+                        <th>Tổng tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>john@example.com</td>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>john@example.com</td>
+                        <td>john@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>john@example.com</td>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>john@example.com</td>
+                        <td>john@example.com</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

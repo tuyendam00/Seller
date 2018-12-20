@@ -50,6 +50,8 @@ namespace Model.EF
 
         public bool? Status { get; set; }
 
+        public decimal? ImportPrice { get; set; }
+
         public virtual Categories Categories { get; set; }
 
         public virtual Colors Colors { get; set; }
